@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+    function confirmSubmit() {
+        return confirm("Are you sure you want to submit this form?");
+    }
+
+    function confirmReset() {
+        return confirm("Are you sure you want to reset the form?");
+    }
+
+    function checkEmpty(field) {
+        if (field.value.trim() === "") {
+            field.classList.add("error");
+        } else {
+            field.classList.remove("error");
+        }
+    }
+</script>
+</head>
+
+<body>
+<form action="submit" method="post" onsubmit="return confirmSubmit()" onreset="return confirmReset()">
+
+    <fieldset>
+        <legend>Personal Information</legend>
+
+        <label>
+            Student ID:
+            <input type="number" name="studentid" required onblur="checkEmpty(this)">
+        </label>
+
+        <label>
+            Full Name (LASTNAME, FirstName MI.):
+            <input type="text" name="fullname" required onblur="checkEmpty(this)">
+        </label>
+
+        <label>
+            Birthday:
+            <input type="date" name="birthday" required onblur="checkEmpty(this)">
+        </label>
+
+        <label>
+            Email Address:
+            <input type="email" name="email" required onblur="checkEmpty(this)">
+        </label>
+    </fieldset>
+
+    <fieldset>
+        <legend>Additional Information</legend>
+
+        <label>
+            Mobile Phone:
+            <input type="text" name="mobilephone" required onblur="checkEmpty(this)">
+        </label>
+
+        <label>
+            Grade Level:
+            <select name="grade_level" required onblur="checkEmpty(this)">
+                <option value="">-- Select an option --</option>
+                <option value="07">Grade 7</option>
+                <option value="08">Grade 8</option>
+                <option value="09">Grade 9</option>
+                <option value="10">Grade 10</option>
+                <option value="11">Grade 11</option>
+                <option value="12">Grade 12</option>
+            </select>
+        </label>
+
+        <label>Intern / Extern:</label>
+        <div class="radio-group">
+            <label>
+                <input type="radio" name="intern_extern" value="Intern" required>
+                Intern
+            </label>
+            <label>
+                <input type="radio" name="intern_extern" value="Extern">
+                Extern
+            </label>
+        </div>
+
+        <label>
+            Preferred Organization / Club:
+            <select name="preferred_club" required onblur="checkEmpty(this)">
+                <option value="">--Select an option--</option>
+                <option value="sports">Sports Club</option>
+                <option value="art">Art Club</option>
+                <option value="music">Music Club</option>
+                <option value="debate">Debate Club</option>
+                <option value="science">Science Club</option>
+            </select>
+        </label>
+
+        <label>
+            Why do you want to join?
+            <textarea rows="5" required onblur="checkEmpty(this)" placeholder="Explain your reasons in detail..."></textarea>
+        </label>
+    </fieldset>
+
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
+
+</form>
+</body>
+</html>
