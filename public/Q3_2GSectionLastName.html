@@ -67,8 +67,8 @@
 
         <label>
             Student ID:
-            <input type="number" name="studentid" required onblur="checkEmpty(this)"> 
-        </label> <br>
+            <input type="number" name="studentid" required onblur="checkEmpty(this)">
+        </label>
 
         <label>
             Full Name (LASTNAME, FirstName MI.):
@@ -104,8 +104,8 @@
                 <option value="10">Grade 10</option>
                 <option value="11">Grade 11</option>
                 <option value="12">Grade 12</option>
-            </select> <br>
-        </label> <br>
+            </select>
+        </label>
 
         <label>Intern / Extern:</label>
         <div class="radio-group">
@@ -116,25 +116,25 @@
             <label>
                 <input type="radio" name="intern_extern" value="Extern">
                 Extern
-            </label> 
-        </div> <br>
+            </label>
+        </div>
 
         <label>
             Preferred Organization / Club:
             <select name="preferred_club" required onblur="checkEmpty(this)">
                 <option value="">--Select an option--</option>
-                <option value="sports">Allianti</option>
-                <option value="art">Kislap</option>
-                <option value="music">Labuyo</option>
-                <option value="debate">Flux</option>
-                <option value="science">Pallastro</option>
-            </select> <br>
-        </label> <br>
+                <option value="sports">Sports Club</option>
+                <option value="art">Art Club</option>
+                <option value="music">Music Club</option>
+                <option value="debate">Debate Club</option>
+                <option value="science">Science Club</option>
+            </select>
+        </label>
 
         <label>
             Why do you want to join? <br>
             <textarea rows="5" required onblur="checkEmpty(this)" placeholder="Explain your reasons in detail..."></textarea>
-        </label>
+        </label> <br>
     </fieldset>
 
     <button type="submit">Submit</button>
