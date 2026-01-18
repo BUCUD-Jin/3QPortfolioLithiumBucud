@@ -1,6 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+    body {
+        font-family:'Courier New', Courier, monospace;
+        background-color: rgb(137, 176, 137);
+        padding: 20px;
+        text-align: center;
+    }
+
+    form {
+        margin: auto;
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    fieldset {
+        padding: 20px;
+        border: 1px solid #b8deb0;
+    }
+    
+    label {
+        display: block;
+    }
+
+    input, select, textarea {
+        border: 1px solid #3d5a41;
+        border-radius: 4px;
+        
+        margin-top: 4px;
+        text-align: center;
+
+    }
+
+     input:focus,select:focus,textarea:focus {
+        outline: none;
+        border-color: rgb(152, 156, 113);
+        background-color: rgb(106, 126, 106)
+
+    }
+</style>
 <script>
     function confirmSubmit() {
         return confirm("Are you sure you want to submit this form?");
@@ -28,23 +67,23 @@
 
         <label>
             Student ID:
-            <input type="number" name="studentid" required onblur="checkEmpty(this)">
-        </label>
+            <input type="number" name="studentid" required onblur="checkEmpty(this)"> 
+        </label> <br>
 
         <label>
             Full Name (LASTNAME, FirstName MI.):
             <input type="text" name="fullname" required onblur="checkEmpty(this)">
-        </label>
+        </label> <br>
 
         <label>
             Birthday:
             <input type="date" name="birthday" required onblur="checkEmpty(this)">
-        </label>
+        </label> <br>
 
         <label>
             Email Address:
             <input type="email" name="email" required onblur="checkEmpty(this)">
-        </label>
+        </label> <br>
     </fieldset>
 
     <fieldset>
@@ -53,7 +92,7 @@
         <label>
             Mobile Phone:
             <input type="text" name="mobilephone" required onblur="checkEmpty(this)">
-        </label>
+        </label> <br>
 
         <label>
             Grade Level:
@@ -65,8 +104,8 @@
                 <option value="10">Grade 10</option>
                 <option value="11">Grade 11</option>
                 <option value="12">Grade 12</option>
-            </select>
-        </label>
+            </select> <br>
+        </label> <br>
 
         <label>Intern / Extern:</label>
         <div class="radio-group">
@@ -77,23 +116,23 @@
             <label>
                 <input type="radio" name="intern_extern" value="Extern">
                 Extern
-            </label>
-        </div>
+            </label> 
+        </div> <br>
 
         <label>
             Preferred Organization / Club:
             <select name="preferred_club" required onblur="checkEmpty(this)">
                 <option value="">--Select an option--</option>
-                <option value="sports">Sports Club</option>
-                <option value="art">Art Club</option>
-                <option value="music">Music Club</option>
-                <option value="debate">Debate Club</option>
-                <option value="science">Science Club</option>
-            </select>
-        </label>
+                <option value="sports">Allianti</option>
+                <option value="art">Kislap</option>
+                <option value="music">Labuyo</option>
+                <option value="debate">Flux</option>
+                <option value="science">Pallastro</option>
+            </select> <br>
+        </label> <br>
 
         <label>
-            Why do you want to join?
+            Why do you want to join? <br>
             <textarea rows="5" required onblur="checkEmpty(this)" placeholder="Explain your reasons in detail..."></textarea>
         </label>
     </fieldset>
