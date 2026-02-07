@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    body {
+        font-family:'Courier New', Courier, monospace;
+        background-color: rgb(137, 176, 137);
+        padding: 20px;
+        text-align: center;
+    }
+
+    form {
+        margin: auto;
+        border-radius: 15px;
+        padding: 20px;
+    }
+
+    fieldset {
+        padding: 20px;
+        border: 1px solid #b8deb0;
+    }
+    
+    label {
+        display: block;
+    }
+
+    input, select, textarea {
+        border: 1px solid #3d5a41;
+        border-radius: 4px;
+        
+        margin-top: 4px;
+        text-align: center;
+
+    }
+
+     input:focus,select:focus,textarea:focus {
+        outline: none;
+        border-color: rgb(152, 156, 113);
+        background-color: rgb(106, 126, 106)
+
+    }
+    </style>
+
+    <body>
+     <header>
+        <div>
+            <h1>
+                Show List of Students Who Signed-Up    
+            </h1>
+            <h3>by AL Mendoza </h3>
+        </div>
+        <nav class="navbar">
+           <button type="button" id="signup"> Back to Sign-Ups </button>
+           <button type="button" id="home"> Back to Home </button>
+        </nav>
+        <br/>
+    </header>
+    <section>
+          <label> Select Your Club
+            <select id="clubs" onchange="showClub(this.value)">
+              <option disabled selected value> -- select an option -- </option>
+              <option value="All"> All </option>
+              <option value="AKSIS"> AKSIS </option>
+              <option value="Bake Club"> Bake Club </option>
+              <option value="Computron"> Computron </option>
+              <option value="Himig Agham"> Himig Agham </option>
+              <option value="Kamalayan"> Kamalayan </option>
+              <option value="Sagala"> Sagala </option>
+            </select>
+          </label> 
+          <p> Total Signup : <span id="tSignUps"> </span></p>
+    </section>
+    <section>
+
+      <table id="results"> </table>
+      
+    </section>
+    <script>
+        // onclick event listeners for buttons
+      signup.onclick = () => {
+        window.location.href = "q3ge3Mendoza.html";
+      }
+
+      home.onclick = () => {
+        window.location.href = "../../index.html";
+      }
+
+      function showClub(theClub) {
+        totalSignUp = 0;        // to ready the counter
+        // read from the localStorage saved as a string - to see if there are anything saved on the users coomputer
+        let signupString = localStorage.getItem("clubsignups")
+        if (!signupString) { rowString = "No Accounts Found" } // initialize the variable to contain the list of accounts object
+        else {
+            signupsList = JSON.parse(signupString) // converts string into the correct data type in this case object    
+            rowString = "";
+            results.innerHTML = ""  // resets the table
+            for (let key in signupsList) {
+              if (signupsList[key].clubs == theClub || theClub == 'All') {
+                rowString += "<tr>";
+                rowString += "<td>" + signupsList[key].clubs + "</td>";
+                rowString += "<td>" + key + "</td>";
+                rowString += "<td>" + signupsList[key].fname + "</td>";
+                rowString += "<td>" + signupsList[key].grade + "</td>";
+                rowString += "<td>" + signupsList[key].semail + "</td>";
+                rowString += "<td>" + signupsList[key].phone + "</td>";
+                rowString += "<td>" + signupsList[key].inex + "</td></tr>";
+                totalSignUp++
+              }
+            }
+        }
+        if (rowString) {
+          rowString = "<tr><th>Club</th><th>ID</th><th>Fullname</th><th>Grade</th><th>Email</th><th>Mobile</th><th>Intern|Extern</th></tr>"+rowString;
+          results.innerHTML = rowString;
+          tSignUps.innerHTML = totalSignUp;
+        }
+        else {
+          results.innerHTML = "No Sign Ups for the club";
+          tSignUps.innerHTML = ""
+        }
+        
+      }
+      
+      showClub('All') // call the club initially.
+
+
+    </script>
+  </body>
+</html>
