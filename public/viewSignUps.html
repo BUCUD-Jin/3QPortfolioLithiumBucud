@@ -76,9 +76,8 @@
       
     </section>
     <script>
-        // onclick event listeners for buttons
       signup.onclick = () => {
-        window.location.href = "q3ge3Mendoza.html";
+        window.location.href = "Q3_2GLiBucud.html";
       }
 
       home.onclick = () => {
@@ -86,14 +85,13 @@
       }
 
       function showClub(theClub) {
-        totalSignUp = 0;        // to ready the counter
-        // read from the localStorage saved as a string - to see if there are anything saved on the users coomputer
+        totalSignUp = 0;        
         let signupString = localStorage.getItem("clubsignups")
-        if (!signupString) { rowString = "No Accounts Found" } // initialize the variable to contain the list of accounts object
+        if (!signupString) { rowString = "No Accounts Found" } 
         else {
-            signupsList = JSON.parse(signupString) // converts string into the correct data type in this case object    
+            signupsList = JSON.parse(signupString) 
             rowString = "";
-            results.innerHTML = ""  // resets the table
+            results.innerHTML = ""  
             for (let key in signupsList) {
               if (signupsList[key].clubs == theClub || theClub == 'All') {
                 rowString += "<tr>";
@@ -120,7 +118,7 @@
         
       }
       
-      showClub('All') // call the club initially.
+      showClub('All') 
 
 
     </script>

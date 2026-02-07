@@ -41,6 +41,8 @@
     }
 </style>
 <script>
+
+
     function confirmSubmit() {
         return confirm("Are you sure you want to submit this form?");
     }
@@ -65,10 +67,25 @@
     <fieldset>
 
         <h1 class="title">Sign-up Page <br/>
+
         <button type="button" id="show"> Show Sign-Ups </button>
         <button type="button" id="home"> Back to Home </button>
+    <script>
+
+        
+        show.onclick = () => {
+        window.location.href = "viewSignUps.html";
+      }
+
+      home.onclick = () => {
+        window.location.href = "../../index.html";
+      }
+
+      </script>
+
       </h1>
-      
+      <form id="dForm" method="get">
+
         <legend>Personal Information</legend>
 
         <label>
