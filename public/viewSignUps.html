@@ -15,6 +15,20 @@
         padding: 20px;
     }
 
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+     table, th, td {
+        border: 1px solid black;
+        padding: 5px;
+    }
+    tr:nth-child(odd) {
+      background: rgb(89, 104, 87);
+      color: rgb(0, 0, 0);
+    }
+
     fieldset {
         padding: 20px;
         border: 1px solid #b8deb0;
@@ -46,8 +60,6 @@
         <div>
             <h1>
                 Show List of Students Who Signed-Up    
-            </h1>
-            <h3>by AL Mendoza </h3>
         </div>
         <nav class="navbar">
            <button type="button" id="signup"> Back to Sign-Ups </button>
@@ -60,12 +72,11 @@
             <select id="clubs" onchange="showClub(this.value)">
               <option disabled selected value> -- select an option -- </option>
               <option value="All"> All </option>
-              <option value="AKSIS"> AKSIS </option>
-              <option value="Bake Club"> Bake Club </option>
-              <option value="Computron"> Computron </option>
-              <option value="Himig Agham"> Himig Agham </option>
-              <option value="Kamalayan"> Kamalayan </option>
-              <option value="Sagala"> Sagala </option>
+              <option value="sports"> Alianti </option>
+              <option value="debate"> Invictus </option>
+              <option value="math"> Math Club </option>
+              <option value="music"> Himig Agham </option>
+              <option value="science"> Astrosoc </option>
             </select>
           </label> 
           <p> Total Signup : <span id="tSignUps"> </span></p>
