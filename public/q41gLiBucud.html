@@ -3,16 +3,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <style>
-    body {font-family:Arial, Helvetica, sans-serif; padding: 15px; border-radius: 8px; width: 350px; margin: auto;}
+    body {font-family:Arial, Helvetica, sans-serif; padding: 20px; border-radius: 8px; width: 350px; margin: auto; justify-content: center; display: flex;}
     
-    .theForm {background: rgb(255, 255, 255); padding: 15px; }
+    .theForm {background: rgb(255, 255, 255); padding: 25px; }
 
     input, select {display: block; margin: 10px; width: 100%; padding: 8px;}
 
     button {width: 100%; padding: 12px; background-color: rgb(92, 124, 200); cursor: pointer; border-radius: 12px;}
 
-    .star {font-size: 30px; color:rgb(194, 194, 194); cursor: pointer;}
-    .star.color {color: rgb(215, 195, 84);}
+    .star {font-size: 28px; color:rgb(194, 194, 194); cursor: pointer;}
+    .star.active {color: rgb(215, 195, 84);}
 
 </style>
 <body>
@@ -33,7 +33,7 @@
         </select>
 
         <label> Rating: </label>
-        <div id="starContainer">
+        <div id="rating">
             <span class="star" data-value="1">★</span>
             <span class="star" data-value="2">★</span>
             <span class="star" data-value="3">★</span>
@@ -51,21 +51,73 @@
 </div>
 
 <script>
-    const movieForm = document.getElementById('movieForm');
-    const stars = document.getElementById('.star');
-    const listItems = document.getElementById('listItems');
+    const movieForm = document.getElementById("movieForm");
+    const listItems = document.getElementById("listItems");
+    const movieList = document.getElementById("movieList");
+    let currentRating = 0;
+    const stars = document.querySelectorAll(".star");
 
-    let rating = 0;
-    stars.forEach((star, index) => {
-        star.addEventListener('click', () => {
-            rating = index + 1;
-            stars.forEach((s, index) => {
-                s.classList.toggle('color', index < rating);
+    stars.forEach((star) => {
+        star.addEventListener("click", function () {
+
+            rating = Number(this.getAttribute("data-value"));
+            stars.forEach(s => s.classList.remove("active"));
+
+            currentRating = index + 1;
+            updateStars(currentRating);
             });
         });
-    });
-   
 
-<script src="script.js"></script>
-</body>
-</html>
+    function updateStars(val); {
+        stars.forEach((s, i) => {
+            if (i < val) {
+                s.classList.add("active");
+            } else {
+                s.classList.remove("acttive");
+            }
+        });
+    }
+
+    movieForm.addEventListener("submit", function (e)  {
+        e.preventDefault();
+
+        const newMovie = {
+
+        title: document.getElementById("title").value,
+        year:  document.getElementById("year").value,
+        genre: document.getElementById("genre").value,
+
+        };
+
+    let movies = JSON.parse(localStorage.getItem("movies")) || [];
+    movies.push(newMovie);
+    localStorage.setItem("movies", JSON.stringify(movies));
+
+    displayMovies();
+
+    movieForm.reset();
+    currentRating = 0;
+    updateStars(0);
+    });
+
+    function displayMovies() {
+        listItems.innerHTML = "";
+        let movies = JSON.parse(localStorage.getItem("movies")) || [];
+        movies.forEach(movie => {
+            const li = document.createElement("li");
+            li.className = "movie-entry";
+
+            li.innerHTML = `
+            <strong>${movie.title}</strong><br>
+            Year: ${movie.year}<br>
+            Genre: ${movie.genre}<br>
+            Rating: ${"★".repeat(movie.rating)}
+            `;
+
+            listItems.appendChild(li);
+        });
+    }
+    displayMovies();
+    </script>
+    </body>
+    </html>
