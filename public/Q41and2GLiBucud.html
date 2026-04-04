@@ -85,7 +85,7 @@
 
     let movies = JSON.parse(localStorage.getItem("movies")) || [];
 
-    const doesMovieExist = movies.findIndex(m => m.title.toLowerCase() === title.toLowerCase());
+    const doesMovieExist = movies.findIndex(m => m.title.toLowerCase() === titleInput.toLowerCase());
 
     if (doesMovieExist !== -1) {
             const oldRating = Number(movies[doesMovieExist].rating);
