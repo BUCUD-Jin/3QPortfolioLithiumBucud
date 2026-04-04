@@ -14,6 +14,12 @@
     .star {font-size: 28px; color:rgb(194, 194, 194); cursor: pointer;}
     .star.active {color: rgb(215, 195, 84);}
 
+    #listItems {padding: 0; list-style: none;}
+
+    .movie-entry {border: 1px solid; padding: 15px; border-radius: 6px; margin-top: 10px; position: relative;}
+
+    .delete-btn {color: rgb(174, 174, 174); border: none; cursor: pointer;}
+
 </style>
 <body>
     <div class="theForm">
@@ -57,12 +63,8 @@
     let currentRating = 0;
     const stars = document.querySelectorAll(".star");
 
-    stars.forEach((star) => {
+    stars.forEach((star, index) => {
         star.addEventListener("click", function () {
-
-            rating = Number(this.getAttribute("data-value"));
-            stars.forEach(s => s.classList.remove("active"));
-
             currentRating = index + 1;
             updateStars(currentRating);
             });
@@ -70,39 +72,60 @@
 
     function updateStars(val) {
         stars.forEach((s, i) => {
-            if (i < val) {
-                s.classList.add("active");
-            } else {
-                s.classList.remove("acttive");
-            }
+            s.classList.toggle("active", i < val);
         });
     }
 
     movieForm.addEventListener("submit", function (e)  {
         e.preventDefault();
 
-        const newMovie = {
-
-        title: document.getElementById("title").value,
-        year:  document.getElementById("year").value,
-        genre: document.getElementById("genre").value,
-
-        };
+        const titleInput = document.getElementById("title").value;
+        const yearInput =  document.getElementById("year").value;
+        const genreInput = document.getElementById("genre").value;
 
     let movies = JSON.parse(localStorage.getItem("movies")) || [];
-    movies.push(newMovie);
-    localStorage.setItem("movies", JSON.stringify(movies));
 
-    displayMovies();
+    const doesMovieExist = movies.findIndex(m => m.title.toLowerCase() === title.toLowerCase());
+
+    if (doesMovieExist !== -1) {
+            const oldRating = Number(movies[doesMovieExist].rating);
+            const newRating = (oldRating + currentRating) / 2;
+            movies[doesMovieExist].year = yearInput;
+            movies[doesMovieExist].genre = genreInput;
+            movies[doesMovieExist].rating = Math.round(newRating);
+        } else {
+
+    movies.push({
+
+        title: titleInput,
+        year: yearInput,
+        genre: genreInput,
+        rating: currentRating
+    });
+        }
+
+    localStorage.setItem("movies", JSON.stringify(movies));
 
     movieForm.reset();
     currentRating = 0;
     updateStars(0);
-    });
+    displayMovies();
+
+});
+
+    function deleteMovies(index) {
+        if(confirm("Are you sure you want to delete?")) {
+            let movies = JSON.parse(localStorage.getItem("movies")) || [];
+            movies.splice(index, 1);
+            localStorage.setItem("movies", JSON.stringify(movies));
+            displayMovies();
+        }
+    }
 
     function displayMovies() {
         listItems.innerHTML = "";
         let movies = JSON.parse(localStorage.getItem("movies")) || [];
+
         movies.forEach(movie => {
             const li = document.createElement("li");
             li.className = "movie-entry";
@@ -112,6 +135,7 @@
             Year: ${movie.year}<br>
             Genre: ${movie.genre}<br>
             Rating: ${"★".repeat(movie.rating)}
+            <button class="delete-btn" onlcick="deleteMovies(${index})">Delete</button>
             `;
 
             listItems.appendChild(li);
